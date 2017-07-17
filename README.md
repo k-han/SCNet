@@ -64,6 +64,6 @@ year = {2017}
 
 [1] Kai Han, Rafael S. Rezende, Bumsub Ham, Kwan-Yee K. Wong, Minsu Cho, Cordelia Schmid, Jean Ponce,  "SCNet: Learning Semantic Correspondence", *arXiv:1705.04043*, 2017.
 
-[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow: Semantic Correspondences from Object Proposals", * IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)*, 2017 
+[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow: Semantic Correspondences from Object Proposals", *IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)*, 2017 
 
 [3] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow", *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016 
