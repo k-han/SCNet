@@ -33,7 +33,7 @@ This is the primary net work training and testing code.
 
 ## SCNet_Baselines
 
-Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in Proposal Flow [2].
+Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in Proposal Flow [2, 3].
 
 - `NAM_HOG.m`, `PHM_HOG.m`, `LOM_HOG.m`: evaluate NAM, PHM, and LOM with HOG features.
 	
@@ -42,7 +42,7 @@ Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in
 - `HOG_SCNet_AG.m`: replace the learned SCNet feature by HOG feature in SCNet_AG model.
 
 ## Data
-We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposal Flow[2] to generate our trainging data.
+We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposal Flow[2, 3] to generate our trainging data.
 
   
 # Notes
@@ -64,4 +64,6 @@ year = {2017}
 
 [1] Kai Han, Rafael S. Rezende, Bumsub Ham, Kwan-Yee K. Wong, Minsu Cho, Cordelia Schmid, Jean Ponce,  "SCNet: Learning Semantic Correspondence", *arXiv:1705.04043*, 2017.
 
-[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow", *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016 
+[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow: Semantic Correspondences from Object Proposals", * IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)*, 2017 
+
+[3] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow", *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016 
