@@ -35,11 +35,11 @@ This is the primary net work training and testing code.
 
 Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in Proposal Flow [2, 3].
 
-- `NAM_HOG.m`, `PHM_HOG.m`, `LOM_HOG.m`: evaluate NAM, PHM, and LOM with HOG features.
+- `NAM_HOG_eva.m`, `PHM_HOG_eva.m`, `LOM_HOG_eva.m`: evaluate NAM, PHM, and LOM with HOG features.
 	
-- `NAM_SCNet.m`, `PHM_SCNet.m`, `LOM_SCNet.m`: evaluate NAM, PHM, and LOM with learned SCNet features.
+- `NAM_SCNet_eva.m`, `PHM_SCNet_eva.m`, `LOM_SCNet_eva.m`: evaluate NAM, PHM, and LOM with learned SCNet features.
  
-- `HOG_SCNet_AG.m`: replace the learned SCNet feature by HOG feature in SCNet_AG model.
+- `HOG_SCNet_AG_eva.m`: replace the learned SCNet feature by HOG feature in SCNet_AG model.
 
 ## Data
 We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposal Flow[2, 3] to generate our trainging data.
