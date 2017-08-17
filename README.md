@@ -54,7 +54,7 @@ We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposa
 @InProceedings{khan2017,
 author = {Kai Han, Rafael S. Rezende, Bumsub Ham, Kwan-Yee K. Wong, Minsu Cho, Cordelia Schmid, and Jean Ponce},
 title = {SCNet: Learning Semantic Correspondence},
-booktitle = {arXiv:1705.04043},
+booktitle = {International Conference on Computer Vision (ICCV)},
 year = {2017}
 }
 ```
