@@ -1,8 +1,4 @@
-
-global conf; %required by load_view, but not used
-
-
-
+global conf;
 addpath(genpath('../utils/feature/'))
 addpath(genpath('../utils/commonFunctions/'))
 %load data
@@ -13,7 +9,7 @@ val_idx = find(imdb.data.set==3);
 
 tbinv_PCR = linspace(0,1,101);
 tbinv_mIoU = linspace(1,100,100);
-
+    
 pcr = zeros(numel(val_idx), numel(tbinv_PCR));
 max_boxNumer = 1000;
 miou_all = ones(numel(val_idx), max_boxNumer).*(-1);
@@ -31,12 +27,12 @@ feat_A = extract_segfeat_hog(img_A,op_A); % HOG
 feat_B = extract_segfeat_hog(img_B,op_B); % HOG
 
 tic;
-fprintf(' - %s matching... ', 'PHM');
+fprintf(' - %s matching... ', 'NAM');
 
 % options for matching
 opt.bDeleteByAspect = true;
 opt.bDensityAware = false;
-opt.bSimVote = false;
+opt.bSimVote = true;
 opt.bVoteExp = true;
 opt.feature = 'HOG';
 
@@ -44,7 +40,7 @@ opt.feature = 'HOG';
 viewA = load_view(img_A, op_A, feat_A, 'conf', conf);
 viewB = load_view(img_B, op_B, feat_B, 'conf', conf);
 
-confidenceMap = PHM( viewA, viewB, opt );
+confidenceMap = NAM( viewA, viewB, opt );
 
 % PCR
 [ confidenceMax, idx ] = max(confidenceMap(idx_for_active_opA,:),[],2);
@@ -72,6 +68,7 @@ miou_all(i, k) = IoU2GT(idx_st(k), idx(idx_st(k)));
 end
 
 end
+
 PCR = mean(pcr,1);
 
 mIoU = zeros(1, numel(tbinv_mIoU));
@@ -80,14 +77,7 @@ for j = 1:numel(tbinv_mIoU)
     mIoU(j) = sum(miou_all(valid_idx))./numel(valid_idx);
 end
 
+NAM_HOG.PCR = PCR;
+NAM_HOG.mIoU = mIoU;
 
-PHM_HOG.PCR = PCR;
-PHM_HOG.mIoU = mIoU;
-
-figure 
-plot(tbinv_PCR, PCR);
-xlabel('IoU threshold');
-ylabel('PCR');
-axis([0, 1, 0, 1]);
-
-save('PHM_eva.mat', 'PHM_HOG');
+save('NAM_eva.mat', 'NAM_HOG');

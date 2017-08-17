@@ -33,7 +33,7 @@ fprintf(' - %s matching... ', 'LOM');
 % options for matching
 opt.bDeleteByAspect = true;
 opt.bDensityAware = false;
-opt.bSimVote = false;
+opt.bSimVote = true;
 opt.bVoteExp = true;
 opt.feature = 'HOG';
 

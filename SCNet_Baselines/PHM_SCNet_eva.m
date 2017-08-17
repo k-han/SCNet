@@ -67,24 +67,24 @@ feat_B.boxes = imdb.data.proposals{batch,2};
 feat_B.hist = feat_b2;
 
 tic;
-fprintf(' - %s matching... ', 'NAM');
+fprintf(' - %s matching... ', 'PHM');
 
 % options for matching
 opt.bDeleteByAspect = true;
 opt.bDensityAware = false;
-opt.bSimVote = false;
+opt.bSimVote = true;
 opt.bVoteExp = true;
 opt.feature = 'LPF';
 
 viewA = vl_getView2(feat_A.boxes);
 viewA.desc = feat_b1';
+viewA.img = feat_A.img;
 viewB = vl_getView2(feat_B.boxes);
 viewB.desc = feat_b2';
+viewB.img = feat_B.img;
 
-confidenceMap = net.vars(net.getVarIndex('A_out')).value;
-if useGPU
-    confidenceMap = gather(confidenceMap);
-end
+confidenceMap = PHM( viewA, viewB, opt );
+
 % PCR
 [ confidenceMax, idx ] = max(confidenceMap(idx_for_active_opA,:),[],2);
 fprintf('   took %.2f secs\n',toc);
@@ -113,7 +113,6 @@ end
 
 end
 
-
 PCR = mean(pcr,1);
 mIoU = zeros(1, numel(tbinv_mIoU));
 for j = 1:numel(tbinv_mIoU)
@@ -121,8 +120,8 @@ for j = 1:numel(tbinv_mIoU)
     mIoU(j) = sum(miou_all(valid_idx))./numel(valid_idx);
 end
 
-NAM_SCNet.PCR = PCR;
-NAM_SCNet.mIoU = mIoU;
+PHM_SCNet.PCR = PCR;
+PHM_SCNet.mIoU = mIoU;
 
 figure 
 plot(tbinv_PCR, PCR);
@@ -130,4 +129,4 @@ xlabel('IoU threshold');
 ylabel('PCR');
 axis([0, 1, 0, 1]);
 
-save('NAM_SCNet-AG+fixA-1000.mat', 'NAM_SCNet');
+save('PHM_SCNet-AG+fixA-1000.mat', 'PHM_SCNet');

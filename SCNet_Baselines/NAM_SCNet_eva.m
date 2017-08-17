@@ -1,18 +1,17 @@
 useGPU = 1;
 gpuDevice([4]);
-
-addpath(genpath('../utils/feature/'))
-addpath(genpath('../utils/commonFunctions/'))
+visulize_bbox = 0;
 run(fullfile('../utils', 'vlfeat-0.9.20','toolbox', 'vl_setup.m')) ;
 addpath(genpath('../utils/'));
 run(fullfile(fileparts(mfilename('fullpath')),...
   '..', 'matlab', 'vl_setupnn.m')) ;
 
 modelPath = '../data/trained_models/PASCAL-RP/SCNet-A.mat';
-
 load(modelPath);
 net = dagnn.DagNN.loadobj(net);
 
+addpath(genpath('../utils/feature/'))
+addpath(genpath('../utils/commonFunctions/'))
 %load data
 imdbPath = '../data/PF-PASCAL-RP-1000.mat';
 imdb = load(imdbPath);
@@ -22,12 +21,7 @@ val_idx = find(imdb.data.set==3);
 tbinv_PCR = linspace(0,1,101);
 tbinv_mIoU = linspace(1,100,100);
     
-% tbinv_PCR = [0 0.1 0.2];% 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0];
 pcr = zeros(numel(val_idx), numel(tbinv_PCR));
-
-feat_time = zeros(numel(val_idx), 1);
-match_time = zeros(numel(val_idx), 1);
-
 max_boxNumer = 1000;
 miou_all = ones(numel(val_idx), max_boxNumer).*(-1);
 for i = 1:numel(val_idx)
@@ -51,10 +45,7 @@ else
   inputs = {'b1_input', im2single(images_A), 'b2_input', im2single(images_B), 'b1_rois', single(proposals_A'), 'b2_rois', single(proposals_B'), 'idx_for_active_opA', single(idx_for_active_opA), 'IoU2GT', single(IoU2GT)} ;
 end
 net.conserveMemory = false ;
-
-tic;
 net.eval(inputs);
-feat_time(i) = toc;
 
 feat_b1 = net.vars(net.getVarIndex('b1_L2NM')).value;
 feat_b1 = reshape(feat_b1, size(feat_b1, 3), size(feat_b1, 4));
@@ -76,12 +67,12 @@ feat_B.boxes = imdb.data.proposals{batch,2};
 feat_B.hist = feat_b2;
 
 tic;
-fprintf(' - %s matching... ', 'LOM');
+fprintf(' - %s matching... ', 'NAM');
 
 % options for matching
 opt.bDeleteByAspect = true;
 opt.bDensityAware = false;
-opt.bSimVote = false;
+opt.bSimVote = true;
 opt.bVoteExp = true;
 opt.feature = 'LPF';
 
@@ -90,12 +81,14 @@ viewA.desc = feat_b1';
 viewB = vl_getView2(feat_B.boxes);
 viewB.desc = feat_b2';
 
-confidenceMap = LOM( viewA, viewB, opt );
-
+confidenceMap = net.vars(net.getVarIndex('A_out')).value;
+if useGPU
+    confidenceMap = gather(confidenceMap);
+end
 % PCR
 [ confidenceMax, idx ] = max(confidenceMap(idx_for_active_opA,:),[],2);
 fprintf('   took %.2f secs\n',toc);
-match_time(i) = toc;
+
 
 i_IoU = zeros(numel(idx_for_active_opA), 1);
 for ii = 1:numel(idx_for_active_opA)
@@ -120,6 +113,7 @@ end
 
 end
 
+
 PCR = mean(pcr,1);
 mIoU = zeros(1, numel(tbinv_mIoU));
 for j = 1:numel(tbinv_mIoU)
@@ -127,10 +121,8 @@ for j = 1:numel(tbinv_mIoU)
     mIoU(j) = sum(miou_all(valid_idx))./numel(valid_idx);
 end
 
-LOM_SCNet.PCR = PCR;
-LOM_SCNet.mIoU = mIoU;
-LOM_SCNet.feat_time = feat_time;
-LOM_SCNet.match_time = match_time;
+NAM_SCNet.PCR = PCR;
+NAM_SCNet.mIoU = mIoU;
 
 figure 
 plot(tbinv_PCR, PCR);
@@ -138,4 +130,4 @@ xlabel('IoU threshold');
 ylabel('PCR');
 axis([0, 1, 0, 1]);
 
-save('LOM_SCNet-A-time-1000.mat', 'LOM_SCNet');
+save('NAM_SCNet-AG+fixA-1000.mat', 'NAM_SCNet');
