@@ -10,6 +10,14 @@ useGPU = isa(inputs{1}, 'gpuArray');
 inputSize_A = size(inputs{1});
 inputSize_B = size(inputs{2});
 
+if(numel(inputSize_A) == 3)
+    inputSize_A = [inputSize_A, 1];
+end
+
+if(numel(inputSize_B) == 3)
+    inputSize_B = [inputSize_B, 1];
+end
+
 if useGPU
     X1 = reshape(gather(inputs{1}), inputSize_A(3:4));
     X2 = reshape(gather(inputs{2}), inputSize_B(3:4));
@@ -32,7 +40,7 @@ else
 %    parpool(5)
     parfor i = 1:num
         dzdx1(i,:) = sum(dzdy.*repmat(X2(i,:),[n, 1]), 2)';
-        dzdx2(i,:) = sum(dzdy.*repmat(X1(i, :)',[1, k]), 1);
+        dzdx2(i,:) = sum(dzdy.*repmat(X1(i,:)',[1, k]), 1);
     end
 % 	toc
 %     time_dot = end_t - start_t
