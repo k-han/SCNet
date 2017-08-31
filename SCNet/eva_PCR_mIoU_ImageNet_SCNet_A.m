@@ -1,4 +1,4 @@
-function [ PCR ] = eva_PCR_mIoU_SCNet_A()
+function [ PCR ] = eva_PCR_mIoU_ImageNet_SCNet_A()
 useGPU = 1;
 gpuDevice([1]);
 visulize_bbox = 0;
