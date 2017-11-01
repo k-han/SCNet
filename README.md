@@ -44,6 +44,8 @@ Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in
 ## Data
 We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposal Flow[2, 3] to generate our trainging data.
 
+Triaining data preparation code is put in `PF-PASCAL-code` folder.
+
   
 # Notes
 
