@@ -1,5 +1,5 @@
 
-Credit to [Proposal Flow] (https://github.com/bsham/ProposalFlow)[1,2].
+Credit to [Proposal Flow](https://github.com/bsham/ProposalFlow)[1,2].
 
 ### References
 
