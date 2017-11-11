@@ -78,8 +78,8 @@ for i = 1:numel(val_idx)
     %[anchor_confA, anchor_idA]=sort(confidenceA,'descend');
     %anchor_idB=max_id(anchor_idA);
 
-    viewA = vl_getView2(data.proposals{batch,1});
-    viewB = vl_getView2(data.proposals{batch,2});
+    viewA = vl_getView(data.proposals{batch,1}, images_A);
+    viewB = vl_getView(data.proposals{batch,2}, images_B);
     opA_=frame2box(viewA.frame);
     opA_xywh = [opA_(1,:);opA_(2,:);opA_(3,:)-opA_(1,:)+1;opA_(4,:)-opA_(2,:)+1];
     [viewA_H, viewA_W,~] = size(images_A);

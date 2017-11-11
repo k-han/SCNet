@@ -85,9 +85,9 @@ opt.bSimVote = true;
 opt.bVoteExp = true;
 opt.feature = 'LPF';
 
-viewA = vl_getView2(feat_A.boxes);
+viewA = vl_getView(feat_A.boxes, feat_A.img);
 viewA.desc = feat_b1';
-viewB = vl_getView2(feat_B.boxes);
+viewB = vl_getView(feat_B.boxes, feat_B.img);
 viewB.desc = feat_b2';
 
 confidenceMap = LOM( viewA, viewB, opt );
