@@ -1,4 +1,7 @@
 # SCNet Code
+Region matching code is contributed by Kai Han (khan@cs.hku.hk).
+
+Dense matching code is contributed by Rafael S. Rezende (rafael.sampaio_de_rezende@inria.fr).
 
 This code is written in MATLAB, and implements the SCNet[1]. For the dataset, see our project page: http://www.di.ens.fr/willow/research/scnet.
 
@@ -11,7 +14,7 @@ This code is written in MATLAB, and implements the SCNet[1]. For the dataset, se
     - [EdgeBox] (https://github.com/pdollar/edges);
     - [SelectiveSearch] (http://koen.me/research/selectivesearch/);
     - [Multiscale Combinatorial Grouping] (https://github.com/jponttuset/mcg);
-  - Download a ImageNet [Caffe Reference model] (http://www.vlfeat.org/matconvnet/pretrained/) in `./data/models/`. 
+  - Download a ImageNet [Caffe Reference model] (http://www.vlfeat.org/matconvnet/pretrained/) in `./data/models/`.
 
 # Codes
 
@@ -21,7 +24,7 @@ Additional Matconvnet modules implemented for SCNet. These code should be copied
 
 ## SCNet
 
-This is the primary net work training and testing code. 
+This is the primary net work training and testing code.
 
 - `SCNet_A_init.m`, `SCNet_AG_init.m`, `SCNet_AGplus_init.m`: initialize the SCNet_A, SCNet_AG, SCNet_AG+.
 
@@ -36,9 +39,9 @@ This is the primary net work training and testing code.
 Comparison code for our SCNet features and HOG features with NAM, PHM and LOM in Proposal Flow [2, 3].
 
 - `NAM_HOG_eva.m`, `PHM_HOG_eva.m`, `LOM_HOG_eva.m`: evaluate NAM, PHM, and LOM with HOG features.
-	
+
 - `NAM_SCNet_eva.m`, `PHM_SCNet_eva.m`, `LOM_SCNet_eva.m`: evaluate NAM, PHM, and LOM with learned SCNet features.
- 
+
 - `HOG_SCNet_AG_eva.m`: replace the learned SCNet feature by HOG feature in SCNet_AG model.
 
 ## Data
@@ -46,11 +49,11 @@ We used PF-PASCAL, PF-WILLOW, PASCAL Parts and CUB data sets and follows Proposa
 
 Triaining data preparation code is put in `PF-PASCAL-code` folder.
 
-  
+
 # Notes
 
-  - The code is provided for academic use only. Use of the code in any commercial or industrial related activities is prohibited. 
-  - If you use our code or dataset, please cite the paper. 
+  - The code is provided for academic use only. Use of the code in any commercial or industrial related activities is prohibited.
+  - If you use our code or dataset, please cite the paper.
 
 ```
 @InProceedings{khan2017,
@@ -61,11 +64,11 @@ year = {2017}
 }
 ```
 
-  
+
 # References
 
 [1] Kai Han, Rafael S. Rezende, Bumsub Ham, Kwan-Yee K. Wong, Minsu Cho, Cordelia Schmid, Jean Ponce,  "SCNet: Learning Semantic Correspondence", *International Conference on Computer Vision (ICCV)*, 2017.
 
-[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow: Semantic Correspondences from Object Proposals", *IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)*, 2017 
+[2] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow: Semantic Correspondences from Object Proposals", *IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)*, 2017
 
-[3] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow", *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016 
+[3] Bumsub Ham, Minsu Cho, Cordelia Schmid, Jean Ponce, "Proposal Flow", *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016
