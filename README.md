@@ -57,7 +57,7 @@ Triaining data preparation code is put in `PF-PASCAL-code` folder.
 
 ```
 @InProceedings{khan2017,
-author = {Kai Han, Rafael S. Rezende, Bumsub Ham, Kwan-Yee K. Wong, Minsu Cho, Cordelia Schmid, and Jean Ponce},
+author = {Kai Han and Rafael S. Rezende and Bumsub Ham and Kwan-Yee K. Wong and Minsu Cho and Cordelia Schmid and Jean Ponce},
 title = {SCNet: Learning Semantic Correspondence},
 booktitle = {International Conference on Computer Vision (ICCV)},
 year = {2017}
